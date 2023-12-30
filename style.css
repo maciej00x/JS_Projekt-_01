@@ -16,11 +16,11 @@ body {
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
-h2 {
+.header {
   color: #333;
 }
 
-input {
+.input-field {
   width: 100%;
   padding: 8px;
   margin-bottom: 12px;
@@ -29,7 +29,7 @@ input {
   border-radius: 4px;
 }
 
-button {
+.action-button {
   width: 100%;
   padding: 10px;
   background-color: #4caf50;
@@ -40,29 +40,25 @@ button {
   font-size: 16px;
 }
 
-button:hover {
+.action-button:hover {
   background-color: #45a049;
 }
 
-table {
+.data-table {
   width: 100%;
   border-collapse: collapse;
   margin-top: 20px;
 }
 
-th,
-td {
+.table-header,
+.table-data {
   border: 1px solid #ddd;
   padding: 12px;
   text-align: left;
 }
 
-th {
+.table-header {
   background-color: #f2f2f2;
-}
-
-#total {
-  font-weight: bold;
 }
 
 .total-section {

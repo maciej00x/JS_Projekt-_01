@@ -11,35 +11,43 @@
     <h1 class="header-style">Income and Spending Table</h1>
 
     <div class="column">
-      <h2>Income</h2>
-      <input type="text" id="incomeCategory" placeholder="Category" />
-      <input type="number" id="incomeAmount" placeholder="Amount" />
-      <button onclick="addIncome()">Add</button>
-      <table id="incomeTable">
-        <thead>
-          <tr>
-            <th>Category</th>
-            <th>Amount</th>
-          </tr>
-        </thead>
-        <tbody></tbody>
-      </table>
-    </div>
-
-    <div class="column">
-      <h2>Spending</h2>
-      <input type="text" id="spendingCategory" placeholder="Category" />
-      <input type="number" id="spendingAmount" placeholder="Amount" />
-      <button onclick="addSpending()">Add</button>
-      <table id="spendingTable">
-        <thead>
-          <tr>
-            <th>Category</th>
-            <th>Amount</th>
-          </tr>
-        </thead>
-        <tbody></tbody>
-      </table>
-    </div>
+        <h2 class="header">Income</h2>
+        <input type="text" id="incomeCategory" class="input-field" placeholder="Category">
+        <input type="number" id="incomeAmount" class="input-field" placeholder="Amount">
+        <button onclick="addIncome()" class="action-button">Add</button>
+        <table id="incomeTable" class="data-table">
+          <thead>
+            <tr class="table-header">
+              <th>Category</th>
+              <th>Amount</th>
+            </tr>
+          </thead>
+          <tbody></tbody>
+        </table>
+        <div class="total-section">
+          <span>Total Income:</span>
+          <span id="totalIncome">0</span>
+        </div>
+      </div>
+    
+      <div class="column">
+        <h2 class="header">Spending</h2>
+        <input type="text" id="spendingCategory" class="input-field" placeholder="Category">
+        <input type="number" id="spendingAmount" class="input-field" placeholder="Amount">
+        <button onclick="addSpending()" class="action-button">Add</button>
+        <table id="spendingTable" class="data-table">
+          <thead>
+            <tr class="table-header">
+              <th>Category</th>
+              <th>Amount</th>
+            </tr>
+          </thead>
+          <tbody></tbody>
+        </table>
+        <div class="total-section">
+          <span>Total Spending:</span>
+          <span id="totalSpending">0</span>
+        </div>
+      </div>
   </body>
 </html>
