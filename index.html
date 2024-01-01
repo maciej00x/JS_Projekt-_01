@@ -8,46 +8,76 @@
     <title>Document</title>
   </head>
   <body>
-    <h1 class="header-style">Income and Spending Table</h1>
+    <div class="header-section">
+      <div class="balance-section" id="balanceInfo">
+        Saldo:
+        <span id="balanceText" class="zero-balance">Saldo wynosi zero</span>
+        <span id="remainingBalance" class="positive-balance"
+          >PLN <span>0</span></span
+        >
+      </div>
+    </div>
 
-    <div class="column">
-        <h2 class="header">Income</h2>
-        <input type="text" id="incomeCategory" class="input-field" placeholder="Category">
-        <input type="number" id="incomeAmount" class="input-field" placeholder="Amount">
-        <button onclick="addIncome()" class="action-button">Add</button>
+    <div class="container">
+      <div class="column">
+        <h2 class="header">Przychody</h2>
+        <input
+          type="text"
+          id="incomeCategory"
+          class="input-field"
+          placeholder="Kategoria"
+        />
+        <input
+          type="number"
+          id="incomeAmount"
+          class="input-field"
+          placeholder="Kwota"
+        />
+        <button onclick="addIncome()" class="action-button">Dodaj</button>
         <table id="incomeTable" class="data-table">
           <thead>
             <tr class="table-header">
-              <th>Category</th>
-              <th>Amount</th>
+              <th>Kategoria</th>
+              <th>Kwota</th>
             </tr>
           </thead>
           <tbody></tbody>
         </table>
         <div class="total-section">
-          <span>Total Income:</span>
+          <span>Suma Przychodów:</span>
           <span id="totalIncome">0</span>
         </div>
       </div>
-    
+
       <div class="column">
-        <h2 class="header">Spending</h2>
-        <input type="text" id="spendingCategory" class="input-field" placeholder="Category">
-        <input type="number" id="spendingAmount" class="input-field" placeholder="Amount">
-        <button onclick="addSpending()" class="action-button">Add</button>
+        <h2 class="header">Wydatki</h2>
+        <input
+          type="text"
+          id="spendingCategory"
+          class="input-field"
+          placeholder="Kategoria"
+        />
+        <input
+          type="number"
+          id="spendingAmount"
+          class="input-field"
+          placeholder="Kwota"
+        />
+        <button onclick="addSpending()" class="action-button">Dodaj</button>
         <table id="spendingTable" class="data-table">
           <thead>
             <tr class="table-header">
-              <th>Category</th>
-              <th>Amount</th>
+              <th>Kategoria</th>
+              <th>Kwota</th>
             </tr>
           </thead>
           <tbody></tbody>
         </table>
         <div class="total-section">
-          <span>Total Spending:</span>
+          <span>Suma Wydatków:</span>
           <span id="totalSpending">0</span>
         </div>
       </div>
+    </div>
   </body>
 </html>
