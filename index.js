@@ -1,6 +1,8 @@
 let incomeList = [];
 let spendingList = [];
 
+// Dodawanie przychodu
+
 function addIncome() {
   const incomeCategory = document.getElementById("incomeCategory").value;
   const incomeAmount = parseFloat(
@@ -14,6 +16,8 @@ function addIncome() {
     updateBalanceInfo();
   }
 }
+
+// Aktualizacja tabeli przychodu
 
 function updateIncomeTable() {
   const incomeTableBody = document.querySelector("#incomeTable tbody");
@@ -29,6 +33,8 @@ function updateIncomeTable() {
   });
 }
 
+// Aktualizacja przychodu całkowitego
+
 function updateTotalIncome() {
   const totalIncomeElement = document.getElementById("totalIncome");
   const totalIncome = incomeList.reduce(
@@ -37,6 +43,8 @@ function updateTotalIncome() {
   );
   totalIncomeElement.textContent = totalIncome.toFixed(2);
 }
+
+// Funkcja dodawania wydatków
 
 function addSpending() {
   const spendingCategory = document.getElementById("spendingCategory").value;
@@ -52,6 +60,8 @@ function addSpending() {
   }
 }
 
+// Aktualizacja tabeli wydatków
+
 function updateSpendingTable() {
   const spendingTableBody = document.querySelector("#spendingTable tbody");
   spendingTableBody.innerHTML = "";
@@ -66,6 +76,8 @@ function updateSpendingTable() {
   });
 }
 
+// Aktualizacja całkowitych wydatków
+
 function updateTotalSpending() {
   const totalSpendingElement = document.getElementById("totalSpending");
   const totalSpending = spendingList.reduce(
@@ -74,6 +86,8 @@ function updateTotalSpending() {
   );
   totalSpendingElement.textContent = totalSpending.toFixed(2);
 }
+
+// Aktualizacja salda
 
 function updateBalanceInfo() {
   const balanceText = document.getElementById("balanceText");
