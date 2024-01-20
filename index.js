@@ -1,23 +1,115 @@
-function updateTotal() {
-  let totalIncome = 0;
-  let totalSpending = 0;
+let incomeList = [];
+let spendingList = [];
 
-  totalIncome +=
-    parseFloat(document.getElementById("incomeSalary").innerText) || 0;
-  totalIncome +=
-    parseFloat(document.getElementById("incomeRent").innerText) || 0;
-  totalIncome +=
-    parseFloat(document.getElementById("incomeUtilities").innerText) || 0;
+function addIncome() {
+  const incomeCategory = document.getElementById("incomeCategory").value;
+  const incomeAmount = parseFloat(
+    document.getElementById("incomeAmount").value
+  );
 
-  totalSpending +=
-    parseFloat(document.getElementById("spendingSalary").innerText) || 0;
-  totalSpending +=
-    parseFloat(document.getElementById("spendingRent").innerText) || 0;
-  totalSpending +=
-    parseFloat(document.getElementById("spendingUtilities").innerText) || 0;
-
-  document.getElementById("totalIncome").innerText = totalIncome;
-  document.getElementById("totalSpending").innerText = totalSpending;
+  if (incomeCategory && !isNaN(incomeAmount)) {
+    incomeList.push({ category: incomeCategory, amount: incomeAmount });
+    updateIncomeTable();
+    updateTotalIncome();
+    updateBalanceInfo();
+  }
 }
 
-updateTotal();
+function updateIncomeTable() {
+  const incomeTableBody = document.querySelector("#incomeTable tbody");
+  incomeTableBody.innerHTML = "";
+
+  incomeList.forEach((income) => {
+    const row = incomeTableBody.insertRow();
+    const cellCategory = row.insertCell(0);
+    const cellAmount = row.insertCell(1);
+
+    cellCategory.textContent = income.category;
+    cellAmount.textContent = income.amount.toFixed(2);
+  });
+}
+
+function updateTotalIncome() {
+  const totalIncomeElement = document.getElementById("totalIncome");
+  const totalIncome = incomeList.reduce(
+    (total, income) => total + income.amount,
+    0
+  );
+  totalIncomeElement.textContent = totalIncome.toFixed(2);
+}
+
+function addSpending() {
+  const spendingCategory = document.getElementById("spendingCategory").value;
+  const spendingAmount = parseFloat(
+    document.getElementById("spendingAmount").value
+  );
+
+  if (spendingCategory && !isNaN(spendingAmount)) {
+    spendingList.push({ category: spendingCategory, amount: spendingAmount });
+    updateSpendingTable();
+    updateTotalSpending();
+    updateBalanceInfo();
+  }
+}
+
+function updateSpendingTable() {
+  const spendingTableBody = document.querySelector("#spendingTable tbody");
+  spendingTableBody.innerHTML = "";
+
+  spendingList.forEach((spending) => {
+    const row = spendingTableBody.insertRow();
+    const cellCategory = row.insertCell(0);
+    const cellAmount = row.insertCell(1);
+
+    cellCategory.textContent = spending.category;
+    cellAmount.textContent = spending.amount.toFixed(2);
+  });
+}
+
+function updateTotalSpending() {
+  const totalSpendingElement = document.getElementById("totalSpending");
+  const totalSpending = spendingList.reduce(
+    (total, spending) => total + spending.amount,
+    0
+  );
+  totalSpendingElement.textContent = totalSpending.toFixed(2);
+}
+
+function updateBalanceInfo() {
+  const balanceText = document.getElementById("balanceText");
+  const remainingBalance = document.getElementById("remainingBalance");
+
+  const totalIncome = incomeList.reduce(
+    (total, income) => total + income.amount,
+    0
+  );
+  const totalSpending = spendingList.reduce(
+    (total, spending) => total + spending.amount,
+    0
+  );
+  const balance = totalIncome - totalSpending;
+
+  remainingBalance.querySelector("span").textContent = balance.toFixed(2);
+
+  if (balance > 0) {
+    remainingBalance.classList.remove("zero-balance");
+    remainingBalance.classList.add("positive-balance");
+  } else if (balance < 0) {
+    remainingBalance.classList.remove("zero-balance", "positive-balance");
+    remainingBalance.classList.add("negative-balance");
+  } else {
+    remainingBalance.classList.remove("positive-balance", "negative-balance");
+    remainingBalance.classList.add("zero-balance");
+  }
+
+  balanceText.textContent = `Saldo wynosi ${balance.toFixed(2)}`;
+}
+
+document
+  .getElementById("incomeAmount")
+  .addEventListener("input", updateBalanceInfo);
+document
+  .getElementById("spendingAmount")
+  .addEventListener("input", updateBalanceInfo);
+
+updateBalanceInfo();
