@@ -2,7 +2,6 @@ let incomeList = [];
 let spendingList = [];
 
 // Dodawanie przychodu
-
 function addIncome() {
   const incomeCategory = document.getElementById("incomeCategory").value;
   const incomeAmount = parseFloat(
@@ -17,8 +16,32 @@ function addIncome() {
   }
 }
 
-// Aktualizacja tabeli przychodu
+// Funkcja edytowania przychodu
+function editIncome(income) {
+  const newName = prompt("Podaj nową nazwę dla przychodu:", income.category);
+  const newAmount = prompt("Podaj nową kwotę dla przychodu:", income.amount);
 
+  if (newName !== null && newAmount !== null) {
+    income.category = newName;
+    income.amount = parseFloat(newAmount);
+    updateIncomeTable();
+    updateTotalIncome();
+    updateBalanceInfo();
+  }
+}
+
+// Funkcja usuwania przychodu
+function deleteIncome(income) {
+  const index = incomeList.indexOf(income);
+  if (index !== -1) {
+    incomeList.splice(index, 1);
+    updateIncomeTable();
+    updateTotalIncome();
+    updateBalanceInfo();
+  }
+}
+
+// Aktualizacja tabeli przychodu
 function updateIncomeTable() {
   const incomeTableBody = document.querySelector("#incomeTable tbody");
   incomeTableBody.innerHTML = "";
@@ -27,25 +50,25 @@ function updateIncomeTable() {
     const row = incomeTableBody.insertRow();
     const cellCategory = row.insertCell(0);
     const cellAmount = row.insertCell(1);
+    const cellActions = row.insertCell(2);
 
     cellCategory.textContent = income.category;
     cellAmount.textContent = income.amount.toFixed(2);
+
+    const editButton = document.createElement("button");
+    editButton.textContent = "Edytuj";
+    editButton.addEventListener("click", () => editIncome(income));
+
+    const deleteButton = document.createElement("button");
+    deleteButton.textContent = "Usuń";
+    deleteButton.addEventListener("click", () => deleteIncome(income));
+
+    cellActions.appendChild(editButton);
+    cellActions.appendChild(deleteButton);
   });
 }
 
-// Aktualizacja przychodu całkowitego
-
-function updateTotalIncome() {
-  const totalIncomeElement = document.getElementById("totalIncome");
-  const totalIncome = incomeList.reduce(
-    (total, income) => total + income.amount,
-    0
-  );
-  totalIncomeElement.textContent = totalIncome.toFixed(2);
-}
-
 // Funkcja dodawania wydatków
-
 function addSpending() {
   const spendingCategory = document.getElementById("spendingCategory").value;
   const spendingAmount = parseFloat(
@@ -60,8 +83,32 @@ function addSpending() {
   }
 }
 
-// Aktualizacja tabeli wydatków
+// Funkcja edytowania wydatków
+function editSpending(spending) {
+  const newName = prompt("Podaj nową nazwę dla wydatku:", spending.category);
+  const newAmount = prompt("Podaj nową kwotę dla wydatku:", spending.amount);
 
+  if (newName !== null && newAmount !== null) {
+    spending.category = newName;
+    spending.amount = parseFloat(newAmount);
+    updateSpendingTable();
+    updateTotalSpending();
+    updateBalanceInfo();
+  }
+}
+
+// Funkcja usuwania wydatków
+function deleteSpending(spending) {
+  const index = spendingList.indexOf(spending);
+  if (index !== -1) {
+    spendingList.splice(index, 1);
+    updateSpendingTable();
+    updateTotalSpending();
+    updateBalanceInfo();
+  }
+}
+
+// Aktualizacja tabeli wydatków
 function updateSpendingTable() {
   const spendingTableBody = document.querySelector("#spendingTable tbody");
   spendingTableBody.innerHTML = "";
@@ -70,14 +117,25 @@ function updateSpendingTable() {
     const row = spendingTableBody.insertRow();
     const cellCategory = row.insertCell(0);
     const cellAmount = row.insertCell(1);
+    const cellActions = row.insertCell(2);
 
     cellCategory.textContent = spending.category;
     cellAmount.textContent = spending.amount.toFixed(2);
+
+    const editButton = document.createElement("button");
+    editButton.textContent = "Edytuj";
+    editButton.addEventListener("click", () => editSpending(spending));
+
+    const deleteButton = document.createElement("button");
+    deleteButton.textContent = "Usuń";
+    deleteButton.addEventListener("click", () => deleteSpending(spending));
+
+    cellActions.appendChild(editButton);
+    cellActions.appendChild(deleteButton);
   });
 }
 
 // Aktualizacja całkowitych wydatków
-
 function updateTotalSpending() {
   const totalSpendingElement = document.getElementById("totalSpending");
   const totalSpending = spendingList.reduce(
@@ -87,8 +145,17 @@ function updateTotalSpending() {
   totalSpendingElement.textContent = totalSpending.toFixed(2);
 }
 
-// Aktualizacja salda
+// Aktualizacja całkowitego przychodu
+function updateTotalIncome() {
+  const totalIncomeElement = document.getElementById("totalIncome");
+  const totalIncome = incomeList.reduce(
+    (total, income) => total + income.amount,
+    0
+  );
+  totalIncomeElement.textContent = totalIncome.toFixed(2);
+}
 
+// Aktualizacja salda
 function updateBalanceInfo() {
   const balanceText = document.getElementById("balanceText");
   const remainingBalance = document.getElementById("remainingBalance");
@@ -106,24 +173,20 @@ function updateBalanceInfo() {
   remainingBalance.querySelector("span").textContent = balance.toFixed(2);
 
   if (balance > 0) {
-    remainingBalance.classList.remove("zero-balance");
+    balanceText.textContent = `Możesz jeszcze wydać ${balance.toFixed(
+      2
+    )} złotych`;
+    remainingBalance.classList.remove("zero-balance", "negative-balance");
     remainingBalance.classList.add("positive-balance");
   } else if (balance < 0) {
+    balanceText.textContent = `Bilans jest ujemny. Jesteś na minusie ${Math.abs(
+      balance
+    ).toFixed(2)} złotych`;
     remainingBalance.classList.remove("zero-balance", "positive-balance");
     remainingBalance.classList.add("negative-balance");
   } else {
+    balanceText.textContent = "Bilans wynosi zero";
     remainingBalance.classList.remove("positive-balance", "negative-balance");
     remainingBalance.classList.add("zero-balance");
   }
-
-  balanceText.textContent = `Saldo wynosi ${balance.toFixed(2)}`;
 }
-
-document
-  .getElementById("incomeAmount")
-  .addEventListener("input", updateBalanceInfo);
-document
-  .getElementById("spendingAmount")
-  .addEventListener("input", updateBalanceInfo);
-
-updateBalanceInfo();
