@@ -191,5 +191,5 @@ function updateBalanceInfo() {
   }
 }
 
-// Początkowe wywołanie funkcji aktualizacji salda
+// Początkowe wywołanie aktualizacji salda
 updateBalanceInfo();
