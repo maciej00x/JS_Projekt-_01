@@ -1,7 +1,7 @@
 let incomeList = [];
 let spendingList = [];
 
-// Dodawanie przychodu
+// Funkcja dodawania przychodu
 function addIncome() {
   const incomeCategory = document.getElementById("incomeCategory").value;
   const incomeAmount = parseFloat(
@@ -170,23 +170,26 @@ function updateBalanceInfo() {
   );
   const balance = totalIncome - totalSpending;
 
-  remainingBalance.querySelector("span").textContent = balance.toFixed(2);
+  balanceText.textContent =
+    balance > 0
+      ? `Możesz jeszcze wydać ${balance.toFixed(2)} złotych`
+      : balance < 0
+      ? `Bilans jest ujemny. Jesteś na minusie ${Math.abs(balance).toFixed(
+          2
+        )} złotych`
+      : "Bilans wynosi zero";
 
   if (balance > 0) {
-    balanceText.textContent = `Możesz jeszcze wydać ${balance.toFixed(
-      2
-    )} złotych`;
     remainingBalance.classList.remove("zero-balance", "negative-balance");
     remainingBalance.classList.add("positive-balance");
   } else if (balance < 0) {
-    balanceText.textContent = `Bilans jest ujemny. Jesteś na minusie ${Math.abs(
-      balance
-    ).toFixed(2)} złotych`;
     remainingBalance.classList.remove("zero-balance", "positive-balance");
     remainingBalance.classList.add("negative-balance");
   } else {
-    balanceText.textContent = "Bilans wynosi zero";
     remainingBalance.classList.remove("positive-balance", "negative-balance");
     remainingBalance.classList.add("zero-balance");
   }
 }
+
+// Początkowe wywołanie funkcji aktualizacji salda
+updateBalanceInfo();
