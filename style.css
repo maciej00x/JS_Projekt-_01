@@ -75,8 +75,18 @@ body {
   margin-top: 20px;
 }
 
-.table-header,
-.table-data,
+.table-header {
+  border: 1px solid #ddd;
+  padding: 12px;
+  text-align: left;
+}
+
+.table-data {
+  border: 1px solid #ddd;
+  padding: 12px;
+  text-align: left;
+}
+
 .table-actions {
   border: 1px solid #ddd;
   padding: 12px;
@@ -99,20 +109,22 @@ body {
 .balance-section {
   margin-bottom: 20px;
   padding: 10px;
-  border: 1px solid #ddd;
+  border: 1px solid #f87979;
   border-radius: 4px;
   font-size: 16px;
   text-align: center;
+
+  background-color: #fff;
 }
 
 .positive-balance {
-  color: #4caf50;
+  color: #54c357;
 }
 
 .zero-balance {
-  color: #333;
+  color: #504f4f;
 }
 
 .negative-balance {
-  color: #f44336;
+  color: #ff1100;
 }
