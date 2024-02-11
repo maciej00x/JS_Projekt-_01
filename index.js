@@ -53,7 +53,7 @@ function updateIncomeTable() {
     const cellActions = row.insertCell(2);
 
     cellCategory.textContent = income.category;
-    cellAmount.textContent = income.amount.toFixed(2) + " zł";
+    cellAmount.textContent = income.amount.toFixed(2) + " zł ";
 
     const editButton = document.createElement("button");
     editButton.textContent = "Edytuj";
@@ -120,7 +120,7 @@ function updateSpendingTable() {
     const cellActions = row.insertCell(2);
 
     cellCategory.textContent = spending.category;
-    cellAmount.textContent = spending.amount.toFixed(2) + " zł";
+    cellAmount.textContent = spending.amount.toFixed(2) + " zł ";
 
     const editButton = document.createElement("button");
     editButton.textContent = "Edytuj";
@@ -142,7 +142,7 @@ function updateTotalSpending() {
     (total, spending) => total + spending.amount,
     0
   );
-  totalSpendingElement.textContent = totalSpending.toFixed(2) + " zł";
+  totalSpendingElement.textContent = totalSpending.toFixed(2) + " zł ";
 }
 
 // Aktualizacja całkowitego przychodu
@@ -152,7 +152,7 @@ function updateTotalIncome() {
     (total, income) => total + income.amount,
     0
   );
-  totalIncomeElement.textContent = totalIncome.toFixed(2) + " zł";
+  totalIncomeElement.textContent = totalIncome.toFixed(2) + " zł ";
 }
 
 // Aktualizacja salda
