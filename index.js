@@ -18,8 +18,8 @@ function addIncome() {
 
 // Funkcja edytowania przychodu
 function editIncome(income) {
-  const newName = prompt("Podaj nową nazwę dla przychodu:", income.category);
-  const newAmount = prompt("Podaj nową kwotę dla przychodu:", income.amount);
+  const newName = prompt("Nowa nazwa przychodu:", income.category);
+  const newAmount = prompt("Nowa kwota przychodu:", income.amount);
 
   if (newName !== null && newAmount !== null) {
     income.category = newName;
@@ -85,8 +85,8 @@ function addSpending() {
 
 // Funkcja edytowania wydatków
 function editSpending(spending) {
-  const newName = prompt("Podaj nową nazwę dla wydatku:", spending.category);
-  const newAmount = prompt("Podaj nową kwotę dla wydatku:", spending.amount);
+  const newName = prompt("Nowa nazwa wydatku:", spending.category);
+  const newAmount = prompt("Nowa nazwa wydatku:", spending.amount);
 
   if (newName !== null && newAmount !== null) {
     spending.category = newName;
