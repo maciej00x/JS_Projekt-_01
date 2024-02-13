@@ -1,6 +1,15 @@
 let incomeList = [];
 let spendingList = [];
 
+// Funkcja informacyjna
+function validateInput(category, amount) {
+  if (!category.trim() || isNaN(amount) || amount <= 0) {
+    alert("Wprowadź dane");
+    return false;
+  }
+  return true;
+}
+
 // Funkcja dodawania przychodu
 function addIncome() {
   const incomeCategory = document.getElementById("incomeCategory").value;
@@ -8,7 +17,7 @@ function addIncome() {
     document.getElementById("incomeAmount").value
   );
 
-  if (incomeCategory && !isNaN(incomeAmount)) {
+  if (validateInput(incomeCategory, incomeAmount)) {
     incomeList.push({ category: incomeCategory, amount: incomeAmount });
     updateIncomeTable();
     updateTotalIncome();
@@ -75,7 +84,7 @@ function addSpending() {
     document.getElementById("spendingAmount").value
   );
 
-  if (spendingCategory && !isNaN(spendingAmount)) {
+  if (validateInput(spendingCategory, spendingAmount)) {
     spendingList.push({ category: spendingCategory, amount: spendingAmount });
     updateSpendingTable();
     updateTotalSpending();
@@ -86,7 +95,7 @@ function addSpending() {
 // Funkcja edytowania wydatków
 function editSpending(spending) {
   const newName = prompt("Nowa nazwa wydatku:", spending.category);
-  const newAmount = prompt("Nowa nazwa wydatku:", spending.amount);
+  const newAmount = prompt("Nowa kwota wydatku:", spending.amount);
 
   if (newName !== null && newAmount !== null) {
     spending.category = newName;
