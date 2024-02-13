@@ -4,7 +4,7 @@ let spendingList = [];
 // Funkcja informacyjna
 function validateInput(category, amount) {
   if (!category.trim() || isNaN(amount) || amount <= 0) {
-    alert("Wprowadź dane");
+    alert("Wprowadź lub popraw dane");
     return false;
   }
   return true;
@@ -12,16 +12,20 @@ function validateInput(category, amount) {
 
 // Funkcja dodawania przychodu
 function addIncome() {
-  const incomeCategory = document.getElementById("incomeCategory").value;
-  const incomeAmount = parseFloat(
-    document.getElementById("incomeAmount").value
-  );
+  const incomeCategoryInput = document.getElementById("incomeCategory");
+  const incomeAmountInput = document.getElementById("incomeAmount");
+
+  const incomeCategory = incomeCategoryInput.value;
+  const incomeAmount = parseFloat(incomeAmountInput.value);
 
   if (validateInput(incomeCategory, incomeAmount)) {
     incomeList.push({ category: incomeCategory, amount: incomeAmount });
     updateIncomeTable();
     updateTotalIncome();
     updateBalanceInfo();
+
+    incomeCategoryInput.value = "";
+    incomeAmountInput.value = "";
   }
 }
 
@@ -30,7 +34,11 @@ function editIncome(income) {
   const newName = prompt("Nowa nazwa przychodu:", income.category);
   const newAmount = prompt("Nowa kwota przychodu:", income.amount);
 
-  if (newName !== null && newAmount !== null) {
+  if (
+    newName !== null &&
+    newAmount !== null &&
+    validateInput(newName, parseFloat(newAmount))
+  ) {
     income.category = newName;
     income.amount = parseFloat(newAmount);
     updateIncomeTable();
@@ -79,16 +87,20 @@ function updateIncomeTable() {
 
 // Funkcja dodawania wydatków
 function addSpending() {
-  const spendingCategory = document.getElementById("spendingCategory").value;
-  const spendingAmount = parseFloat(
-    document.getElementById("spendingAmount").value
-  );
+  const spendingCategoryInput = document.getElementById("spendingCategory");
+  const spendingAmountInput = document.getElementById("spendingAmount");
+
+  const spendingCategory = spendingCategoryInput.value;
+  const spendingAmount = parseFloat(spendingAmountInput.value);
 
   if (validateInput(spendingCategory, spendingAmount)) {
     spendingList.push({ category: spendingCategory, amount: spendingAmount });
     updateSpendingTable();
     updateTotalSpending();
     updateBalanceInfo();
+
+    spendingCategoryInput.value = "";
+    spendingAmountInput.value = "";
   }
 }
 
@@ -97,7 +109,11 @@ function editSpending(spending) {
   const newName = prompt("Nowa nazwa wydatku:", spending.category);
   const newAmount = prompt("Nowa kwota wydatku:", spending.amount);
 
-  if (newName !== null && newAmount !== null) {
+  if (
+    newName !== null &&
+    newAmount !== null &&
+    validateInput(newName, parseFloat(newAmount))
+  ) {
     spending.category = newName;
     spending.amount = parseFloat(newAmount);
     updateSpendingTable();
