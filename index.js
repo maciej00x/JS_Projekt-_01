@@ -1,5 +1,5 @@
-let incomeList = [];
-let spendingList = [];
+const incomeList = [];
+const spendingList = [];
 
 // Funkcja informacyjna
 function validateInput(category, amount) {
