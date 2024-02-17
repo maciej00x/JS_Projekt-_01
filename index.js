@@ -3,7 +3,7 @@ let spendingList = [];
 
 // Funkcja informacyjna
 function validateInput(category, amount) {
-  if (!category.trim() || isNaN(amount) || amount <= 0) {
+  if (!category.trim() || isNaN(amount) || amount < 0.01) {
     alert("Wprowadź lub popraw dane");
     return false;
   }
